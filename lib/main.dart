@@ -1,11 +1,25 @@
+import 'package:cryptrapp/class/projects.dart';
 import 'package:cryptrapp/compontents/Appbar.dart';
 import 'package:cryptrapp/compontents/Drawer.dart';
 import 'package:cryptrapp/compontents/button.dart';
 import 'package:cryptrapp/compontents/myCard.dart';
+import 'package:cryptrapp/cubit/projects_cubit.dart';
 import 'package:cryptrapp/pages/item_detail_page.dart';
+import 'package:cryptrapp/repo/projects_repo.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: FirebaseOptions(
+        apiKey: "AIzaSyDD6y476aW-d4E56WCoTnFtxkyQBFBFJhc",
+        appId: "1:870612418439:android:0b85d2c18af18513c81d22",
+        messagingSenderId: "870612418439",
+        projectId: "cryptrapp",
+        storageBucket: "cryptrapp.appspot.com"),
+  );
   runApp(const MyApp());
 }
 
@@ -15,13 +29,16 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return MultiBlocProvider(providers:[
+    BlocProvider(create: (context) => ProjectsCubit())] ,
+
+        child: MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
       home: const MyHomePage(title: 'Flutter Demo Home Page'),
-    );
+    ));
   }
 }
 
@@ -37,7 +54,14 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+var prorepo=ProjectsRepo();
 
+@override
+  void initState() {
+    // TODO: implement initState
+  context.read<ProjectsCubit>().getProjeler();
+
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -57,42 +81,58 @@ class _MyHomePageState extends State<MyHomePage> {
 
         ),
       ),),
-      body: GestureDetector(
-        child: Column(
-          children: <Widget>[
-            SizedBox(height: 5,),
-            ListTile(
-              title: Text("Hello Tahsin",style: TextStyle(color: Colors.white,fontSize: 25,fontWeight: FontWeight.bold),),
-              subtitle: Padding(padding: EdgeInsets.only(top: 9),child: Text("Welcome Again",style: TextStyle(color: Colors.white,fontSize: 12),),),
-            ),
+      body: Column(
+        children: <Widget>[
+          SizedBox(height: 5,),
+          ListTile(
+            title: Text("Hello Tahsin",style: TextStyle(color: Colors.white,fontSize: 25,fontWeight: FontWeight.bold),),
+            subtitle: Padding(padding: EdgeInsets.only(top: 9),child: Text("Welcome Again",style: TextStyle(color: Colors.white,fontSize: 12),),),
+          ),
 
-            SizedBox(height: 15,),
+          SizedBox(height: 15,),
 
-            Padding(padding: EdgeInsets.symmetric(horizontal: 20),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    SizedBox(width: 55,),
-                    MyCard(),
-                    SizedBox(height: 35,),
-                    MyCard(),
-                    SizedBox(height: 35,),
-                    MyCard(),
+          Padding(padding: EdgeInsets.symmetric(horizontal: 20),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
 
-                  ],
-                ),
-              ],
-            ),)
+                  Container(width:322,height: 511,
+                    child: BlocBuilder<ProjectsCubit,List<Projects>>(builder:
+                    (context,liste)
+                        {
+                          if(liste.isNotEmpty)
+                            {
+                              return ListView.builder(itemBuilder: (context,index){
+                                var proje=liste[index];
+                                if(proje.proje_onecikarilan=true)
+                                  {
+                                    return MyCard(item: proje);
+                                  }
+                                else
+                                  {
+                                    return Container(child: Text("asda",style: TextStyle(color: Colors.white),),);
+                                  }
+                              },itemCount: liste.length,);
+                            }
+                          else
+                            {
+                              return Container(child: Text("asda",style: TextStyle(color: Colors.white),),);
+                            }
+                        }
 
-          ],
-        ),
-    onTap: (){
-          Navigator.push(context, MaterialPageRoute(builder: (context)=>ItemDetail()));
-    },  ),
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),)
+
+        ],
+      ),
     );
   }
 }

@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "870612418439",
+    "project_id": "cryptrapp",
+    "storage_bucket": "cryptrapp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:870612418439:android:0b85d2c18af18513c81d22",
+        "android_client_info": {
+          "package_name": "com.example.cryptrapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "870612418439-nol6av7tt20sakaguke3h0d1ar84uiio.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDD6y476aW-d4E56WCoTnFtxkyQBFBFJhc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "870612418439-nol6av7tt20sakaguke3h0d1ar84uiio.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -20,10 +20,10 @@ class _DrawerMyState extends State<DrawerMy> {
             children: [
               SizedBox(height: 48,),
               buildMenuItem(text: "Home Page",icon: Icons.home),
-              buildMenuItem(text: "New Crypto Projects",icon: Icons.home),
-              buildMenuItem(text: "New NFT Projects",icon: Icons.home),
-              buildMenuItem(text: "About Us",icon: Icons.home),
-              buildMenuItem(text: "Contact",icon: Icons.home),
+              buildMenuItem(text: "New Crypto Projects",icon: Icons.account_tree_rounded),
+              buildMenuItem(text: "New NFT Projects",icon: Icons.image_sharp),
+              buildMenuItem(text: "About Us",icon: Icons.contact_support_rounded),
+              buildMenuItem(text: "Contact",icon: Icons.mail),
 
 
             ],
