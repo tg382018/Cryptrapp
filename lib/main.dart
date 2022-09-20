@@ -60,7 +60,6 @@ var prorepo=ProjectsRepo();
   void initState() {
     // TODO: implement initState
   context.read<ProjectsCubit>().getProjeler();
-
   }
 
   @override
@@ -100,7 +99,7 @@ var prorepo=ProjectsRepo();
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
 
-                  Container(width:322,height: 511,
+                  Container(width:MediaQuery.of(context).size.width /1.13,height: MediaQuery.of(context).size.height /1.4,
                     child: BlocBuilder<ProjectsCubit,List<Projects>>(builder:
                     (context,liste)
                         {
@@ -108,19 +107,20 @@ var prorepo=ProjectsRepo();
                             {
                               return ListView.builder(itemBuilder: (context,index){
                                 var proje=liste[index];
-                                if(proje.proje_onecikarilan=true)
+                                if(proje.proje_onecikarilan==true)
                                   {
-                                    return MyCard(item: proje);
+
+                                  return MyCard(item: proje);
                                   }
                                 else
                                   {
-                                    return Container(child: Text("asda",style: TextStyle(color: Colors.white),),);
+                                    return Container();
                                   }
                               },itemCount: liste.length,);
                             }
                           else
                             {
-                              return Container(child: Text("asda",style: TextStyle(color: Colors.white),),);
+                              return Container();
                             }
                         }
 

@@ -46,7 +46,7 @@ class _ItemDetailState extends State<ItemDetail> {
                     children: [
                       Padding(
                         padding: const EdgeInsets.only(left: 18.0),
-                        child: CircleAvatar(radius: 34,backgroundImage: AssetImage(widget.item.proje_icon_url),),
+                        child: CircleAvatar(radius: 34,backgroundImage: NetworkImage(widget.item.proje_icon_url),),
                       ),
                       Padding(
                         padding: const EdgeInsets.only(left: 8.0),

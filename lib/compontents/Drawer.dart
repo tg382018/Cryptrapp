@@ -1,3 +1,7 @@
+import 'package:cryptrapp/main.dart';
+import 'package:cryptrapp/pages/about_page.dart';
+import 'package:cryptrapp/pages/crypto_list_page.dart';
+import 'package:cryptrapp/pages/nft_list_page.dart';
 import 'package:flutter/material.dart';
 
 class DrawerMy extends StatefulWidget {
@@ -42,7 +46,35 @@ class _DrawerMyState extends State<DrawerMy> {
 leading: Icon(icon,color: color,),
       title: Text(text,style: TextStyle(color: color),),
       hoverColor: Colors.blue,
-     onTap: (){},
+     onTap: (){
+        if(text=="New NFT Projects")
+          {
+            Navigator.push(context, MaterialPageRoute(builder: (context)=>NftListPage()));
+          }
+        if(text=="New Crypto Projects")
+        {
+          Navigator.push(context, MaterialPageRoute(builder: (context)=>CryptoListPage()));
+        }
+        if(text=="About Us")
+        {
+          Navigator.push(context, MaterialPageRoute(builder: (context)=>AboutPage()));
+        }
+        if(text=="Contact")
+        {
+          Navigator.push(context, MaterialPageRoute(builder: (context)=>NftListPage()));
+        }
+        if(text=="Home Page")
+        {
+          Navigator.of(
+              context)
+              .pushAndRemoveUntil(
+              MaterialPageRoute(
+                  builder: (context) =>
+                    MyHomePage(title: "title")),
+                  (Route<dynamic> route) =>
+              false);
+        }
+     },
 
     );
   }
