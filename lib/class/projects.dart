@@ -2,10 +2,10 @@ class Projects
 {
 
 
-  Projects(this.proje_key,this.proje_no, this.proje_adi, this.proje_ag,this.proje_turu, this.proje_aciklama,
+  Projects(this.proje_key,this.proje_no, this.proje_adi,this.proje_turu, this.proje_ag, this.proje_aciklama,
       this.proje_fon, this.proje_twitter, this.proje_discord,
       this.proje_telegram, this.proje_linkedin, this.proje_network,
-      this.proje_icon_url, this.proje_resim_url,this.proje_onecikarilan);
+      this.proje_icon_url, this.proje_resim_url,this.proje_website,this.proje_onecikarilan);
 
   String proje_key;
   int proje_no;
@@ -21,6 +21,7 @@ class Projects
   String proje_network;
   String proje_icon_url;
   String proje_resim_url;
+  String proje_website;
   bool proje_onecikarilan;
   factory Projects.fromJson(Map<String,dynamic> json)
   {
@@ -38,6 +39,7 @@ class Projects
       json["proje_network"] as String,
       json["proje_icon_url"] as String,
       json["proje_resim_url"] as String,
+      json["proje_website"] as String,
       json["proje_onecikarilan"] as bool,
     );
   }

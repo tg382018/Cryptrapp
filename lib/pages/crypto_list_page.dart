@@ -53,7 +53,7 @@ class _CryptoListPageState extends State<CryptoListPage> {
                         {
                           return ListView.builder(itemBuilder: (context,index){
                             var proje=liste[index];
-                            if(proje.proje_network=="Crypto")
+                            if(proje.proje_turu=="Crypto")
                             {
                               return MyCard(item: proje);
                             }

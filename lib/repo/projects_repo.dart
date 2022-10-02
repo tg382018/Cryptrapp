@@ -45,6 +45,7 @@ Future<void> addProjects(
   String proje_network,
   String proje_icon_url,
   String proje_resim_url,
+    String proje_website,
     bool proje_onecikarilan,
     ) async
 {
@@ -64,6 +65,7 @@ Future<void> addProjects(
   bilgi["proje_network"]=proje_network;
   bilgi["proje_icon_url"]=proje_icon_url;
   bilgi["proje_resim_url"]=proje_resim_url;
+  bilgi["proje_website"]=proje_website;
   bilgi["proje_onecikarilan"]=proje_onecikarilan;
   await docUser.set(bilgi);
 }

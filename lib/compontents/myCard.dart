@@ -22,7 +22,7 @@ visib=widget.item.proje_onecikarilan;
   Widget build(BuildContext context) {
     return Container(
       width: 322,
-      height: 222,
+      height: MediaQuery.of(context).size.height /6.5,
       child: Column(
         children: [
           GestureDetector(

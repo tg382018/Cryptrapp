@@ -59,7 +59,10 @@ var prorepo=ProjectsRepo();
 @override
   void initState() {
     // TODO: implement initState
+
+
   context.read<ProjectsCubit>().getProjeler();
+
   }
 
   @override

@@ -1,8 +1,18 @@
+
+import 'package:flutter/gestures.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'package:cryptrapp/compontents/Appbar.dart';
 import 'package:cryptrapp/compontents/Drawer.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:video_player/video_player.dart';
+
+import 'package:image_gallery_saver/image_gallery_saver.dart';
+import 'package:screenshot/screenshot.dart';
+import 'package:path_provider/path_provider.dart';
+import 'package:permission_handler/permission_handler.dart';
+import 'dart:io';
+import 'dart:typed_data';
+import 'package:share_plus/share_plus.dart';
 
 import '../class/projects.dart';
 import '../compontents/myCard.dart';
@@ -14,9 +24,41 @@ class ItemDetail extends StatefulWidget {
 }
 
 class _ItemDetailState extends State<ItemDetail> {
+
+   bool visib1=true;
+   bool visib2=true;
+   bool visib3=true;
+   bool visib4=true;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+if(widget.item.proje_twitter=="-")
+  {
+    visib1=false;
+  }
+
+if(widget.item.proje_discord=="-")
+{
+  visib2=false;
+}
+
+if(widget.item.proje_telegram=="-")
+{
+  visib3=false;
+}
+
+if(widget.item.proje_linkedin=="-")
+{
+  visib4=false;
+}
+
+  }
+
+
   @override
 
-
+  ScreenshotController sckon=ScreenshotController();
   Widget build(BuildContext context) {
     return  Scaffold(
       drawer: DrawerMy(),
@@ -87,15 +129,94 @@ class _ItemDetailState extends State<ItemDetail> {
               children: [
                 Padding(
                   padding: const EdgeInsets.only(right: 8.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      Padding(padding: EdgeInsets.symmetric(vertical: 1,horizontal: 4),child: Icon(FontAwesomeIcons.twitter,color: Colors.white,),),
-                    Padding(padding: EdgeInsets.symmetric(vertical: 1,horizontal: 4),child: Icon(FontAwesomeIcons.discord,color: Colors.white,),),
-                    Padding(padding: EdgeInsets.symmetric(vertical: 1,horizontal: 4),child: Icon(FontAwesomeIcons.telegram,color: Colors.white,),),
-                    Padding(padding: EdgeInsets.symmetric(vertical: 1,horizontal: 4),child: Icon(FontAwesomeIcons.linkedin,color: Colors.white,),),
-                  ],),
+                  child: RaisedButton(color: Colors.deepOrangeAccent,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+
+
+                        Visibility( visible:visib1,
+                          child: Row(
+                            children: [
+                              GestureDetector(onTap:()async{
+                                var url = widget.item.proje_twitter;
+                                if (await canLaunch(url)) {
+                                  await launch(url);
+                                } else {
+                                  throw 'Could not launch $url';
+                                }
+                              },child: Padding(padding: EdgeInsets.symmetric(vertical: 1,horizontal: 4),child: Icon(FontAwesomeIcons.twitter,color: Colors.white,),)),
+                            ],
+                          ),
+                        ),
+
+
+
+    Visibility(visible: visib2,
+      child: Row(
+        children: [
+          GestureDetector(onTap:()async{
+          var url = widget.item.proje_discord;
+          if (await canLaunch(url)) {
+          await launch(url);
+          } else {
+          throw 'Could not launch $url';
+          }
+          },child:
+                              Row(
+                                children: [
+                                  Padding(padding: EdgeInsets.symmetric(vertical: 1,horizontal: 4),child: Icon(FontAwesomeIcons.discord,color: Colors.white,),),
+                                ],
+                              ),),
+        ],
+      ),
+    ),
+
+
+
+    Visibility(visible: visib3,
+      child: Row(
+        children: [
+          GestureDetector(onTap:()async{
+          var url = widget.item.proje_telegram;
+          if (await canLaunch(url)) {
+          await launch(url);
+          } else {
+          throw 'Could not launch $url';
+          }
+          },child:
+                            Padding(padding: EdgeInsets.symmetric(vertical: 1,horizontal: 4),child: Icon(FontAwesomeIcons.telegram,color: Colors.white,),),),
+        ],
+      ),
+    ),
+
+
+
+    Visibility(visible: visib4,
+      child: Row(
+        children: [
+          GestureDetector(onTap:()async{
+          var url = widget.item.proje_linkedin;
+          if (await canLaunch(url)) {
+          await launch(url);
+          } else {
+          throw 'Could not launch $url';
+          }
+          },child:
+                            Padding(padding: EdgeInsets.symmetric(vertical: 1,horizontal: 4),child: Icon(FontAwesomeIcons.linkedin,color: Colors.white,),),),
+        ],
+      ),
+    ),
+
+
+                    ],),
+                  onPressed: ()
+                   {},),
                 ),
+
+
+
+
 
               ],
             ),
@@ -104,7 +225,7 @@ class _ItemDetailState extends State<ItemDetail> {
                 Padding(
                   padding: const EdgeInsets.only(left: 8.0),
                   child: Container(width: 145,height: 44
-                      
+
                       ,child: Row(mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           SizedBox(width: 113,height: 33,child: Column(
@@ -122,8 +243,32 @@ class _ItemDetailState extends State<ItemDetail> {
                 ),
               ],
             ),
-            FlatButton(color: Colors.deepOrangeAccent,onPressed: (){}, child: Text("Website",style: const TextStyle(color: Colors.white),),
-            ),
+
+
+
+
+            FlatButton(color: Colors.deepOrangeAccent,onPressed: (){}, child: RichText(
+    text: TextSpan(
+    children: [
+    TextSpan(
+    style: TextStyle(color: Colors.black),
+    text: ""
+    ),
+    TextSpan(
+    style: TextStyle(color: Colors.white),
+    text: "Web Sitemiz",
+    recognizer: TapGestureRecognizer()..onTap =  () async{
+    var url = widget.item.proje_website;
+    if (await canLaunch(url)) {
+    await launch(url);
+    } else {
+    throw 'Could not launch $url';
+    }
+    }
+    ),
+    ]
+    )),),
+
 
           ],
 
@@ -131,5 +276,22 @@ class _ItemDetailState extends State<ItemDetail> {
 
 
     );
+  }
+
+  Future<String> saveImage(Uint8List bytes) async
+  {
+    await[Permission.storage].request();
+    final result=await ImageGallerySaver.saveImage(bytes);
+    return result['filePath'];
+
+  }
+
+  Future saveAndShare(Uint8List bytes) async
+  {
+    final directory=await getApplicationDocumentsDirectory();
+    final image=File('${directory.path}/flutter.png');
+    image.writeAsBytesSync(bytes);
+    final im='${widget.item.proje_adi} - See about more details on CryptrApp';
+    await Share.shareFiles([image.path],text: im);
   }
 }

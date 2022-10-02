@@ -1,5 +1,6 @@
 import 'package:cryptrapp/main.dart';
 import 'package:cryptrapp/pages/about_page.dart';
+import 'package:cryptrapp/pages/contact.dart';
 import 'package:cryptrapp/pages/crypto_list_page.dart';
 import 'package:cryptrapp/pages/nft_list_page.dart';
 import 'package:flutter/material.dart';
@@ -61,7 +62,7 @@ leading: Icon(icon,color: color,),
         }
         if(text=="Contact")
         {
-          Navigator.push(context, MaterialPageRoute(builder: (context)=>NftListPage()));
+          Navigator.push(context, MaterialPageRoute(builder: (context)=>Contact()));
         }
         if(text=="Home Page")
         {

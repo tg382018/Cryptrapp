@@ -53,19 +53,27 @@ class _NftListPageState extends State<NftListPage> {
                         {
                           return ListView.builder(itemBuilder: (context,index){
                             var proje=liste[index];
-                            if(proje.proje_network=="NFT")
+                            if(proje.proje_turu=="NFT")
                             {
                               return MyCard(item: proje);
                             }
                             else
                             {
-                              return Container();
+                              return Container(child: Column(
+                                children: [
+                                  Text(proje.proje_adi,style: TextStyle(color: Colors.white),),
+                                  Text(proje.proje_no.toString(),style: TextStyle(color: Colors.white),),
+                                  Text(proje.proje_turu,style: TextStyle(color: Colors.white),),
+                                  Text(proje.proje_resim_url,style: TextStyle(color: Colors.white),),
+
+                                ],
+                              ),);
                             }
                           },itemCount: liste.length,);
                         }
                         else
                         {
-                          return Container();
+                          return Container(child: Text("aa",style: TextStyle(color: Colors.white),));
                         }
                       }
 
