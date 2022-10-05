@@ -45,7 +45,7 @@ class _NftListPageState extends State<NftListPage> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
 
-                    Container(width:322,height:MediaQuery.of(context).size.height /1.4,
+                    Container(width:MediaQuery.of(context).size.width /1.13,height: MediaQuery.of(context).size.height /1.2,
                       child: BlocBuilder<ProjectsCubit,List<Projects>>(builder:
                           (context,liste)
                       {

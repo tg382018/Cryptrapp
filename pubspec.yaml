@@ -45,6 +45,7 @@ dependencies:
   permission_handler: ^10.0.0
   path_provider: ^2.0.11
   url_launcher: ^6.1.5
+  shared_preferences: ^2.0.15
 
 
 dev_dependencies:
@@ -90,6 +91,7 @@ flutter:
     - family: Poppins
       fonts:
         - asset: assets/fonts/Basketball.otf
+        - asset: assets/fonts/cm_sans_serif_2012.ttf
   #       - asset: fonts/Schyler-Italic.ttf
   #         style: italic
   #   - family: Trajan Pro
