@@ -59,15 +59,7 @@ class _NftListPageState extends State<NftListPage> {
                             }
                             else
                             {
-                              return Container(child: Column(
-                                children: [
-                                  Text(proje.proje_adi,style: TextStyle(color: Colors.white),),
-                                  Text(proje.proje_no.toString(),style: TextStyle(color: Colors.white),),
-                                  Text(proje.proje_turu,style: TextStyle(color: Colors.white),),
-                                  Text(proje.proje_resim_url,style: TextStyle(color: Colors.white),),
-
-                                ],
-                              ),);
+                              return Container();
                             }
                           },itemCount: liste.length,);
                         }

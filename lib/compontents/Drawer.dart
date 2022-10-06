@@ -71,7 +71,7 @@ leading: Icon(icon,color: color,),
               .pushAndRemoveUntil(
               MaterialPageRoute(
                   builder: (context) =>
-                    MyHomePage(title: "title")),
+                    MyHomePage()),
                   (Route<dynamic> route) =>
               false);
         }

@@ -1,11 +1,13 @@
 
+import 'dart:convert';
+
 import 'package:flutter/gestures.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:cryptrapp/compontents/Appbar.dart';
 import 'package:cryptrapp/compontents/Drawer.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-
+import 'package:flutter_quill/flutter_quill.dart' hide Text;
 import 'package:image_gallery_saver/image_gallery_saver.dart';
 import 'package:screenshot/screenshot.dart';
 import 'package:path_provider/path_provider.dart';
@@ -15,7 +17,7 @@ import 'dart:typed_data';
 import 'package:share_plus/share_plus.dart';
 
 import '../class/projects.dart';
-import '../compontents/myCard.dart';
+
 class ItemDetail extends StatefulWidget {
   const ItemDetail({Key? key,required this.item}) : super(key: key);
   final Projects item;
@@ -29,6 +31,17 @@ class _ItemDetailState extends State<ItemDetail> {
    bool visib2=true;
    bool visib3=true;
    bool visib4=true;
+
+   QuillController _controller = QuillController.basic();
+
+
+   void gelenikaydet(incomingJSONText)
+   {
+     var myJSON = jsonDecode(incomingJSONText);
+     _controller = QuillController(
+         document: Document.fromJson(myJSON),
+         selection: TextSelection.collapsed(offset: 0));
+   }
 
   @override
   void initState() {
@@ -52,7 +65,7 @@ if(widget.item.proje_linkedin=="-")
 {
   visib4=false;
 }
-
+gelenikaydet(widget.item.proje_aciklama);
   }
 
 
@@ -115,12 +128,19 @@ if(widget.item.proje_linkedin=="-")
 
               ),
             ),
-
             Padding(
               padding: const EdgeInsets.all(8.0),
-              child: Column(
-                children: [Text(widget.item.proje_aciklama
-                ,style: TextStyle(color: Colors.white),)],
+              child: QuillEditor(
+                focusNode: FocusNode(),
+                padding: EdgeInsets.all(0),
+                autoFocus: false,
+                scrollable: true,
+                showCursor: false,
+                controller: _controller,
+                readOnly: true,
+                expands: false,
+                scrollController: ScrollController(),
+                // true for view only mode
               ),
             ),
             Column(
@@ -256,7 +276,7 @@ if(widget.item.proje_linkedin=="-")
     ),
     TextSpan(
     style: TextStyle(color: Colors.white),
-    text: "Web Sitemiz",
+    text: "Web Site",
     recognizer: TapGestureRecognizer()..onTap =  () async{
     var url = widget.item.proje_website;
     if (await canLaunch(url)) {

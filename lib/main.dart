@@ -4,6 +4,7 @@ import 'package:cryptrapp/compontents/Drawer.dart';
 import 'package:cryptrapp/compontents/button.dart';
 import 'package:cryptrapp/compontents/myCard.dart';
 import 'package:cryptrapp/cubit/projects_cubit.dart';
+import 'package:cryptrapp/pages/admin_page.dart';
 import 'package:cryptrapp/pages/item_detail_page.dart';
 import 'package:cryptrapp/pages/onboarding_screen.dart';
 import 'package:cryptrapp/repo/projects_repo.dart';
@@ -44,17 +45,16 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home: MyHomePage()
     ));
   }
 }
 
 class MyHomePage extends StatefulWidget {
-  const MyHomePage({Key? key, required this.title}) : super(key: key);
+  const MyHomePage({Key? key,}) : super(key: key);
 
 
 
-  final String title;
 
   @override
   State<MyHomePage> createState() => _MyHomePageState();
@@ -63,13 +63,26 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
 var prorepo=ProjectsRepo();
 
+
+String isimim="";
+
+Future<String> isimAl() async
+{
+  var sp = await SharedPreferences.getInstance();
+
+  isimim = sp.getString('titlem')!;
+  return isimim;
+}
+
 Future<bool> oturumKontrol() async {
+
   var sp = await SharedPreferences.getInstance();
 
   bool? spKullaniciAdi = sp.getBool('showHome');
 
 
   if(spKullaniciAdi == true){
+
     return true;
   }else{
     return false;
@@ -79,7 +92,7 @@ Future<bool> oturumKontrol() async {
   void initState() {
     // TODO: implement initState
 
-
+  isimAl();
   context.read<ProjectsCubit>().getProjeler();
 
   }
@@ -119,7 +132,11 @@ Future<bool> oturumKontrol() async {
                   children: <Widget>[
                     SizedBox(height: 5,),
                     ListTile(
-                      title: Text(widget.title,style: TextStyle(color: Colors.white,fontSize: 25,fontWeight: FontWeight.bold),),
+                      title: GestureDetector(
+                          onLongPress: (){
+                            Navigator.push(context, MaterialPageRoute(builder: (context)=>AdminPage()));
+                          },
+                          child: Text(isimim,style: TextStyle(color: Colors.white,fontSize: 25,fontWeight: FontWeight.bold),)),
                       subtitle: Padding(padding: EdgeInsets.only(top: 9),child: Text("Welcome Again",style: TextStyle(color: Colors.white,fontSize: 12),),),
                     ),
 
